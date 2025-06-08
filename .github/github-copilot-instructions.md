@@ -1,6 +1,6 @@
 # Global Prompt for GitHub Copilot
 
-**Agents and contributors must avoid making unnecessary changes to the codebase. Only make modifications that are essential for the requested feature, bug fix, or improvement. Unwarranted or cosmetic changes should be avoided.**
+**Agents and contributors must avoid making unnecessary changes to the codebase. Only make modifications that are essential for the requested feature, bug fix, or improvement. Unwarranted or cosmetic changes should be avoided!**
 * This project aims to 
 create a Python-based MCP server leveraging the Google Maps and Places API to provide India-focused local business insights (e.g., answering queries like “What are the best cafes in Bangalore?”).
 * Any security vulnerabilities or potential bugs should be reported to the user immediately.
