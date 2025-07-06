@@ -1,7 +1,8 @@
 [project]
 name = "google-maps-mcp"
-version = "1.0.0"
+version = "2.0.0"
 description = "Google Maps MCP server using Google Places API."
+license-files = ["LICENSE"]
 requires-python = ">=3.8"
 dependencies = [
     "mcp==1.9.4",
@@ -19,15 +20,14 @@ name = "Mastan Shaik"
 
 [project.optional-dependencies]
 dev = [
-    "pytest==8.4.1",
-    "pytest-asyncio==1.0.0"
+    "pytest==8.4.1"
 ]
 
 [project.scripts]
 google-maps-mcp = "google_maps_mcp:main"
 
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 

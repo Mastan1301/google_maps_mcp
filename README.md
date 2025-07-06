@@ -14,16 +14,15 @@ This project provides a Python-based Model Context Protocol (MCP) server that le
 - Python 3.8+
 - A Google Maps API key ([Get one here](https://developers.google.com/maps/documentation/places/web-service/get-api-key))
 
-
 ### Run the MCP server
-- Install `google-mcp-server` using
+- Install `uvx` using
 ```bash
-pipx install google-mcp-server
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 - Run the MCP server-
 ```bash
-google-mcp-server
+uvx google-mcp-server
 ```
 
 ## Contributing
@@ -32,31 +31,24 @@ google-mcp-server
 - Submit a pull request with a clear description of your changes.
 
 ### Setup Steps
-1. **Clone the repository:**
+- **Clone the repository:**
    ```bash
    git clone <your-fork-url>
    cd google_maps_mcp
    ```
-2. **Create and activate a virtual environment:**
+- **Build:**
+    Go to the root of the project and run-
    ```bash
-   python3 -m venv myenv
-   source myenv/bin/activate
+   uv build
    ```
-3. **Build:**
-   ```bash
-   python3 -m build
-   ```
-4. **Set your Google Maps API key:**
+- **Set your Google Maps API key:**
    - You can set it in your environment or in the config (see below).
    - Example (Linux/macOS):
      ```bash
      export GOOGLE_MAPS_API_KEY=your_api_key_here
      ```
-5. **Install the local build as an executable:**
-    ```bash
-    pipx install dist/google_maps_mcp-1.0.0-py3-none-any.whl --force
-    ```
-    After this, ensure that your `PATH` env var contains the `~/.local/bin` path.
+- **Install the local build as an executable:**
+    Ensure that your `PATH` env var contains the `~/.local/bin` path.
 
     If not, add this to the end of your `~/.bashrc` file.
     ```
@@ -69,7 +61,7 @@ google-mcp-server
 
 6. **Run the executable containing the MCP server:**
    ```bash
-   google-maps-mcp
+   uvx dist/google_maps_mcp-1.0.0-py3-none-any.whl
    ```
 
 ## Visual Studio Code: MCP Server Configuration Example
@@ -79,7 +71,8 @@ google-mcp-server
         "servers": {
             "google_maps_mcp_server":{
                 "type": "stdio",
-                "command": "google-maps-mcp",
+                "command": "uvx",
+                "args": ["google-maps-mcp"],
                 "env": {
                     "GOOGLE_MAPS_API_KEY": "<your google maps API key>"
                 }

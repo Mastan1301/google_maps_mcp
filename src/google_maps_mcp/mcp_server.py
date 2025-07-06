@@ -1,4 +1,3 @@
-
 """
 Entrypoint for Google Maps MCP server using MCP library.
 """
@@ -25,18 +24,29 @@ if not api_key:
     
 gmaps_client = googlemaps.Client(key=api_key) if api_key else None
 places_service = PlacesService(gmaps_client)
-mcp = FastMCP("GoogleMapsMCP", version="1.0.0")
+mcp = FastMCP(
+    "GoogleMapsMCP",
+    version="1.0.0",
+    description="A Model Context Protocol (MCP) server for querying Google Maps and Places API for places, restaurants, tourist attractions, and more. Provides tools to find places near a location, sorted by rating or distance."
+)
 
 # Register tools
 @mcp.tool()
-def find_places_nearby(name: str, arguments: dict) -> list:
+def find_places_nearby(location: str, place_type: str = "places_of_interest", sort_by: str = "rating") -> list:
     """
-    Find places of a given type near a location (or 'me'), within 5km, sorted by rating or distance.
-    arguments: {"location": str, "place_type": str, "sort_by": "rating"|"distance"}
+    Find places near a given location using Google Maps Places API.
+
+    Args:
+        location (str): Address or area name to search near. Required.
+        place_type (str, optional): Google Places type (e.g., 'restaurant', 'tourist_attraction', 'meal_takeaway'). Default is 'places_of_interest'.
+        sort_by (str, optional): Sort results by 'rating' or 'distance'. Default is 'rating'.
+
+    Returns:
+        list: List of places, each as a dict with keys: name, rating, vicinity, place_id, types, user_ratings_total.
+
+    Example:
+        find_places_nearby(location='New York', place_type='restaurant', sort_by='distance')
     """
-    location = arguments.get("location", "Bangalore")
-    place_type = arguments.get("place_type", "restaurant")
-    sort_by = arguments.get("sort_by", "rating")
     logger.info(f"find_places_nearby called with location='{location}', place_type='{place_type}', sort_by='{sort_by}'")
     # If location is 'me', you would use user's coordinates (not implemented here)
     results = places_service.get_places_nearby(location, place_type, radius=5000, rank_by=sort_by)
